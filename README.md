@@ -1,2 +1,2 @@
-# gio-academy-js
+# glo-academy-js
 js-intensive
