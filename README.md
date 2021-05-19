@@ -1,4 +1,4 @@
 # gio-academy-js
 js-intensive
 
-https://edchekanov.github.io/gio-academy-js/
+https://edchekanov.github.io/glo-academy-js/
