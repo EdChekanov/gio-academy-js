@@ -29,11 +29,17 @@ const subText = document.createElement('subText');
 const formHandler = (form) => {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-
+        const submitBtn = form.querySelector('button[type=submit]');
         const formInputs = form.querySelectorAll('input');
         formInputs.forEach((el) => {
             if(el.value.trim() === "") throw new Error('пусто');
         })
+                
+        let closeSubText = () => {
+            submitBtn.disabled = false;
+            submitBtn.style.background = "red";
+            subText.textContent = '';
+        }
 
         const data = {};
 
@@ -44,16 +50,22 @@ const formHandler = (form) => {
         }
         sendData(JSON.stringify(data),
 (id) => {
-    subText.textContent = 'Заявка №' + id + ' принята';
-    subText.style.color = "green";
-    subText.style.fontFamily = "Comic Sans MS";
-    form.append(subText);
+        subText.textContent = 'Заявка №' + id + ' принята';
+        subText.style.color = "green";
+        subText.style.fontFamily = "Comic Sans MS";
+        form.append(subText);
+        submitBtn.disabled = true;
+        submitBtn.style.background = "grey";
+        setTimeout(closeSubText, 5000);
 },
 (err) => {
     subText.textContent = 'Технические неполадки';
     subText.style.color = "red";
     subText.style.fontFamily = "Comic Sans MS";
     form.append(subText);
+    submitBtn.disabled = true;
+    submitBtn.style.background = "grey";
+    setTimeout(closeSubText, 5000);
 });
 form.reset();
     })
